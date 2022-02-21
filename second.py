@@ -5,7 +5,12 @@ mutex = Mutex()
 
 
 class Shared:
-
+    '''
+    Shared class that has the following attributes:
+    1. counter
+    2. field size end
+    3. an integer field of end size with zeroed elements
+    '''
     def __init__(self, size):
         self.counter = 0
         self.end = size
@@ -13,6 +18,10 @@ class Shared:
 
 
 def do_count(shared):
+    '''
+    Function that takes a shared object as an argument.
+    This function will be performed by threads.
+    '''
     while shared.counter < shared.end:
 
         # shared.end - 1 to prevent last thread from incrementing an element
