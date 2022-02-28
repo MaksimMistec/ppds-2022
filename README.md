@@ -26,6 +26,34 @@ threads = [Thread(barrier_example, sb1, i) for i in range(5)]
 The first one ran just fine, but when running the second one, even though the function used was exactly the same, the barriers didn't seem to work. 
 This was the part we needed to implement for lab exercise 2. Logically, we want to clear barriers once they finish with their duty, which was in our case in function barrier_example (for exercise 2 where we utilize barrier reusing it was in function barrier_cycle). We added barrier clearing at the very end of our functions, which as expected, seemed to clear the barriers properly and allow us to reuse them multiple times.
 
+## Third lab exercise
+
+In this exercise, our goal was to implement a function that would calculate fibonacci's sequence using threads, which we were to manage using threads.
+
+The problem we are facing in this exercise is how to simulate the function so that our threads run in the correct order (i.e. we want the first i+2 thread to go first). Unfortunately, I could not come up with the correct solution that would function properly, but here is how my thought process went:
+
+```sh
+    def wait(self):
+        self.counter += 1
+        if self.counter == self.n:
+            self.event.signal()
+        else:
+            self.event.wait()
+
+    def release(self):
+        self.event.signal()
+```
+I tried to utilize methods similar to exercises 1 & 2, where I would tell threads to wait until the first one is finished, and then release them at a later point:
+
+```sh
+def compute_fibonacci(barrier, i):
+    sleep(randint(1, 10)/10)
+    barrier.wait()
+    fib_seq[i+2] = fib_seq[i] + fib_seq[i+1]
+    barrier.release()
+```
+The idea was, to let the first thread that reaches the .wait() method to block all the other methods until it finishes it's calculation, and then unblock all the other threads. Unfortunately, this is not the correct solution.. :(
+
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
