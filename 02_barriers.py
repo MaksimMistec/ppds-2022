@@ -4,6 +4,10 @@ from fei.ppds import Thread, Mutex, Event, print
 
 
 class SimpleBarrier:
+    """
+    Class used to simulate barriers using events
+    Function wait is used to block (and unblock) barriers
+    """
     def __init__(self, n):
         self.n = n
         self.counter = 0
