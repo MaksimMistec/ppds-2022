@@ -67,10 +67,10 @@ def main():
         print(producers_nr[k])
         for j in range(5):
                 print(prod_times[j])
-                for i in range(5):
+                for i in range(10):
                     s = Shared(10)
                     c = [Thread(consumer, s) for _ in range(2)]
-                    p = [Thread(producer, s, prod_times[j]) for _ in range(5)]
+                    p = [Thread(producer, s, prod_times[j]) for _ in range(producers_nr[k])]
 
                     sleep(10/prod_times[j])
                     s.finished = True
@@ -87,7 +87,7 @@ def main():
                     print(f"Total count {produced}")
 
                     x.append(prod_times[j])
-                    y.append(5)
+                    y.append(producers_nr[k])
                     z.append(produced_per_second)
                     counter += 1
     # fig = plt.figure()
