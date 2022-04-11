@@ -58,7 +58,7 @@ def subtract(starting_number, ending_number):
         print(f'Subtracting {sub_number} from {total}')
 
 
-def odd_number():
+def even_number():
     """
     Second of the two programs, receives value through
     yield and checks if it's an even number and prints it out.
@@ -77,7 +77,7 @@ def odd_number():
 def main():
     gen = Scheduler()
     gen.schedule(subtract(30, 10))
-    gen.schedule(odd_number())
+    gen.schedule(even_number())
     gen.start()
 
 
